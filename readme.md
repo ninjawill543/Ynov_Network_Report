@@ -357,6 +357,8 @@ Etapes à suivre:
 - Attendre que la victime se connecte à votre serveur RADIUS, pour ensuite collecter le hash de leur mot de passe
 - Reconnecter la victime au vrai serveur RADIUS
 
+Vous pouvez aller consulter un guide avec plus de détails [ici](https://resources.infosecinstitute.com/topics/hacking/attacking-wpa2-enterprise/)
+
 ## Recommandations à mettre en place
 
 # IV - Conclusion
