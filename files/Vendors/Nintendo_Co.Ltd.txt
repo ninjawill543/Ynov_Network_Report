@@ -1,0 +1,3 @@
+Device 58:B0:3E:F1:0C:63 Pokemon GO Plus +
+Device 58:B0:3E:F0:4C:7F Pokemon GO Plus +
+Device 58:B0:3E:5B:09:AF Pokemon GO Plus +

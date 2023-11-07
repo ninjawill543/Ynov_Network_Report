@@ -1,0 +1,5 @@
+Device AC:D6:18:2E:80:B0 OnePlus 9
+Device D0:49:7C:E4:97:3C OnePlus 9
+Device 4C:4F:EE:DA:38:1E OnePlus 8 Pro
+Device AC:5F:EA:13:83:89 1+ Nocth
+Device 4C:4F:EE:E6:89:09 OnePlus 8
