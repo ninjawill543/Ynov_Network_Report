@@ -8,6 +8,8 @@
         - [Réseau Wifi](#réseau-wifi)
         - [Réseau Bluetooth](#réseau-bluetooth)
     - [Équipements réseau](#équipements-réseau)
+        - [Télévisions](#télévisions)
+        - [Bornes Wifi](#bornes-wifi)
 - [III - Sécurité du réseau](#iii---sécurité-du-réseau)
     - [Mesures de sécurité actuelles](#mesures-de-sécurité-actuelles)
     - [Vulnérabilités et menaces potentielles](#vulnérabilités-et-menaces-potentielles)
@@ -116,7 +118,7 @@ On obtient [ce rendu final](files/allDevices.txt) contenant les addresses MAC de
 
 #### MAC address lookup
 
-En utilisant l'api api.macvendors.com on peut maintenant essayer de trouver les fabricants des cartes réseaux trouvées.
+En utilisant l'api `api.macvendors.com` on peut maintenant essayer de trouver les fabricants des cartes réseaux trouvées.
 
 ```python
 // Envoie un requête à l'api
@@ -199,7 +201,7 @@ Nous avons un total de 565 appareils parmis lesquels se trouvent 17 catégories.
 
 1 ordinateur d'après son nom.
 
-### [Cypress Semiconducteur](files/Vendors/CYPRESS_SEMICONDUCTOR.txtt)
+### [Cypress Semiconducteur](files/Vendors/CYPRESS_SEMICONDUCTOR.txt)
 
 10 appareils inconnus semblant appartenir à Ynov d'après leurs noms. Potentiellement les TVs utilisés à travers le batiment.
 
@@ -263,10 +265,12 @@ Device 45:E7:65:3B:F2:1F JBL LIVE300TWS-LE # écouteurs JBL
 
 ## Équipements réseau
 
+### Télévisions
+
 Après avoir scanné l'adresse IP de la télévision dans la salle 201, nous pouvons constater que les ports 1443 et 8000 sont accessibles via un navigateur Web.
 
 ```bash
-m4ul@thinkpad:~$ nmap 10.33.81.194
+$ nmap 10.33.81.194
 Starting Nmap 7.80 ( https://nmap.org ) at 2023-11-06 10:23 CET
 Nmap scan report for 10.33.81.194
 Host is up (0.0030s latency).
@@ -286,9 +290,53 @@ Le port 8000 est aussi ouvert et consultable via un navigateur web `10.33.81.194
 
 Nous avons ensuite scanné le réseaux secondaire afin de trouver les adresses ip de chaque télévision actuellement allumée. 
 ```bash
-m4ul@thinkpad:~$ sudo nmap 10.33.80.0/20 -p1443 --open
+$ sudo nmap 10.33.80.0/20 -p1443 --open
 ```
 Nous avons choisi de filtrer toutes les appareils afin de voir que ceux avec le port 1443 d'ouvert, c'est à dire le port utilisé sur chaque télévision afin qu'un utilisateur puisse se connecter. Vous pouvez consulter la liste des adresses ip des télés ![ici](files/Live_TVs_Secondary_Network.txt)
+
+### Bornes Wifi
+
+Notre idée avant de commencer était d'utiliser un outil comme `aircrack-ng` afin de voir l'adresse MAC et le Channel utilisé par la borne wifi, pour ensuite essayer de capturer les handshakes des étudiants lorsqu'ils se connectaient au réseau.
+
+```bash
+$ sudo airmon-ng start wlp0s20f3
+
+$ sudo airodump-ng wlp0s20f3mon
+```
+
+En regardant les logs créé par l'outil aircrack-ng, nous nous apercevons que le réseau ynov utilisait par les étudiants, c'est-à-dire `WIFI@YNOV` était bien en WPA2 Enterprise, et donc qu'on devait utiliser un autre méthode si l'on voulait retrouver les identifiants des étudiants.
+
+Lorsque nous voyons `PSK` à coté du nom du réseau, cela veut dire `Pre Shared Key`, ou tout simplement que les utilisateurs ont un seul mot de passe qui leur permettent tous de se connecter. Lorsque nous voyons un réseau WPA2 PSK, nous pouvions lancer notre sniffer afin de capturer le handshake, et donc essayer ensuite de retrouver le mot de passe via un outil par exemple Hashcat. 
+
+Nous voyons ici une liste de tous les points d'accès Wi-Fi, visibles lorsque nous étions au rez-de-chaussée:
+```
+E8:10:98:9A:60:81, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+E8:10:98:99:EE:00, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:1A:40, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:EE:01, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+E8:10:98:99:1A:41, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+E8:10:98:9A:60:80, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:66:E0, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:66:E1, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+E8:10:98:99:A9:A1, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+E8:10:98:99:A9:A0, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:A8:00, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:A8:01, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+60:E8:5B:98:E0:DE, 54, WPA2 WPA, CCMP TKIP, PSK, GTBITER
+E8:26:89:FF:96:00, 130, WPA3 WPA2, CCMP, SAE PSK, SONO@YNOV
+E8:10:98:99:2C:40, 260, WPA2, CCMP, MGT, WiFi@YNOV
+E8:10:98:99:2C:41, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
