@@ -343,13 +343,19 @@ Vous pouvez retrouver [ici](#-exploitation-wpa2-enterprise) notre guide sur comm
 
 ### Exploitation WPA2 Enterprise
 
+Pour rappel, nous n'avons pas utilisé cette attaque, nous voulions simplement vous expliquer comment elle fonctionne
+
 Pour commencer, on va vous rappeler comment la WPA2 Enterprise fonctionne:
 
 La WPA2 Enterprise utilise le protocole EAP  pour l'authentification des utilisateurs, généralement en conjonction avec un serveur RADIUS . Ce protocole permet d'établir des clés de chiffrement uniques pour chaque utilisateur, renforçant ainsi la sécurité en utilisant des méthodes d'authentification plus robustes que les simples mots de passe partagés. 
 
+L'attaque consiste à spoofer le réseau cible et à fournir un signal plus fort au client qu'un point d'accès légitime, afin d'effectuer une attaque de Man-In-The-Middle entre les clients et le réseau.
 
-
-
+Etapes à suivre: 
+- Créer et lancer un faux serveur RADIUS, identique en paramètres et en nom au vrai serveur utilisé par l'école
+- Utiliser aireplay-ng afin de d'envoyer des packets `deauthentication` à la victime
+- Attendre que la victime se connecte à votre serveur RADIUS, pour ensuite collecter le hash de leur mot de passe
+- Reconnecter la victime au vrai serveur RADIUS
 
 ## Recommandations à mettre en place
 
