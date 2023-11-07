@@ -14,6 +14,7 @@
     - [Mesures de sécurité actuelles](#mesures-de-sécurité-actuelles)
     - [Vulnérabilités et menaces potentielles](#vulnérabilités-et-menaces-potentielles)
         - [MITM potentiel via les télévisions](#mitm-potentiel-via-les-télévisions)
+        - [Exploitation WPA2 Enterprise](#exploitation-wpa2-enterprise)
     - [Recommandations à mettre en place](#recommandations-à-mettre-en-place)
 - [IV - Conclusion](#iv---conclusion)
 
@@ -267,6 +268,8 @@ Device 45:E7:65:3B:F2:1F JBL LIVE300TWS-LE # écouteurs JBL
 
 ### Télévisions
 
+![](images/tv.gif)
+
 Après avoir scanné l'adresse IP de la télévision dans la salle 201, nous pouvons constater que les ports 1443 et 8000 sont accessibles via un navigateur Web.
 
 ```bash
@@ -328,17 +331,7 @@ E8:10:98:99:2C:40, 260, WPA2, CCMP, MGT, WiFi@YNOV
 E8:10:98:99:2C:41, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
 ```
 
-
-
-
-
-
-
-
-
-
-
-
+Vous pouvez retrouver ![ici](#-exploitation-wpa2-enterprise) notre guide sur comment exploiter la WPA2 Enterprise
 
 # III - Sécurité du réseau
 
@@ -347,6 +340,12 @@ E8:10:98:99:2C:41, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
 ## Vulnérabilités et menaces potentielles
 
 ### MITM potentiel via les télévisions
+
+### Exploitation WPA2 Enterprise
+
+Pour commencer, on va vous rappeler comment la WPA2 Enterprise fonctionne:
+
+
 
 ## Recommandations à mettre en place
 
