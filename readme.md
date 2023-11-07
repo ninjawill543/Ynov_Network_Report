@@ -345,6 +345,10 @@ Vous pouvez retrouver ![ici](#-exploitation-wpa2-enterprise) notre guide sur com
 
 Pour commencer, on va vous rappeler comment la WPA2 Enterprise fonctionne:
 
+La WPA2 Enterprise utilise le protocole EAP  pour l'authentification des utilisateurs, généralement en conjonction avec un serveur RADIUS . Ce protocole permet d'établir des clés de chiffrement uniques pour chaque utilisateur, renforçant ainsi la sécurité en utilisant des méthodes d'authentification plus robustes que les simples mots de passe partagés. 
+
+
+
 
 
 ## Recommandations à mettre en place
