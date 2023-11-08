@@ -335,15 +335,13 @@ Ces adresses MAC nous informent que les routeurs viennent du fabriquant Aruba Ne
 
 Vous pouvez retrouver [ici](#-exploitation-wpa2-enterprise) notre guide sur comment exploiter la WPA2 Enterprise
 
-# III - Sécurité du réseau
+# III - Vulnérabilités et menaces potentielles
 
-## Mesures de sécurité actuelles
+## MITM potentiel via les télévisions
 
-## Vulnérabilités et menaces potentielles
+La connection au port 8000 se fait en http : autrement les échanges ne sont pas chiffrés. Ce qui est donc vulnérable à une attaque Man In The Middle, dans laquelle une personne malveillante pourrait faire télécharger un fichier compromis au lieu de l'application EShare mobile.
 
-### MITM potentiel via les télévisions
-
-### Exploitation WPA2 Enterprise
+## Exploitation WPA2 Enterprise
 
 Pour rappel, nous n'avons pas utilisé cette attaque, nous voulions simplement vous expliquer comment elle fonctionne.
 
@@ -361,9 +359,15 @@ Etapes à suivre:
 
 Vous pouvez aller consulter un guide avec plus de détails [ici](https://resources.infosecinstitute.com/topics/hacking/attacking-wpa2-enterprise/)
 
-## Recommandations à mettre en place
-
 # IV - Conclusion
 
+Nous avons obtenus :
+- les adresses MAC des serrures electroniques
+- les adresses MAC des cartes wifi et bluetooth des routeurs ainsi que leurs adresse IP
+- les adresses MAC d'une multitude d'appereils bluetooth appartenant aux employés d'Ynov ou étudiants
+- toutes les adresses IP et MAC des appareils connecté au réseau principal
+- toutes les addresses IP et MAC des télévisions sur le réseau secondaire
 
-
+Les informations recueillis nous ont aussi permis de détecter des potentielles vulnérabilités :
+- téléchargement de fichier en http sur les TVs
+- wifi publique vulnérable à de la désauthentification
