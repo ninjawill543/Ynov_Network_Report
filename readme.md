@@ -292,7 +292,7 @@ Nous avons ensuite scanné le réseaux secondaire afin de trouver les adresses i
 ```bash
 $ sudo nmap -n 10.33.81.128/25 -p1443 --open
 ```
-Nous avons choisi de filtrer toutes les appareils afin de voir que ceux avec le port 1443 d'ouvert, c'est à dire le port utilisé sur chaque télévision afin qu'un utilisateur puisse se connecter. Vous pouvez consulter la liste des adresses ip des télés ![ici](files/Live_TVs_Secondary_Network.txt)
+Nous avons choisi de filtrer toutes les appareils afin de voir que ceux avec le port 1443 d'ouvert, c'est à dire le port utilisé sur chaque télévision afin qu'un utilisateur puisse se connecter. Vous pouvez consulter la liste des télés ![ici](files/Live_TVs_Secondary_Network.txt)
 
 ### Bornes Wifi
 
