@@ -363,11 +363,11 @@ Vous pouvez aller consulter un guide avec plus de détails [ici](https://resourc
 
 Nous avons obtenus :
 - les adresses MAC des serrures electroniques
-- les adresses MAC des cartes wifi et bluetooth des routeurs ainsi que leurs adresse IP
-- les adresses MAC d'une multitude d'appereils bluetooth appartenant aux employés d'Ynov ou étudiants
-- toutes les adresses IP et MAC des appareils connecté au réseau principal
+- les adresses MAC des cartes wifi et bluetooth des routeurs ainsi que leurs adresses IP
+- les adresses MAC d'une multitude d'appareils bluetooth appartenant aux employés d'Ynov ou étudiants
+- toutes les adresses IP et MAC des appareils connectés au réseau principal
 - toutes les addresses IP et MAC des télévisions sur le réseau secondaire
 
 Les informations recueillis nous ont aussi permis de détecter des potentielles vulnérabilités :
-- téléchargement de fichier en http sur les TVs
+- téléchargement de fichier en http sur les télévisions
 - wifi publique vulnérable à de la désauthentification
