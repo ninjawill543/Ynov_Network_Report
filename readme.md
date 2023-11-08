@@ -42,7 +42,7 @@ Se projet est un exercice visant à explorer et à analyser le réseau Ynov en r
 
 L'infrastructure du réseau Ynov est conçue pour prendre en charge un nombre significatif d'appareils connectés. Le réseau principal a pour addresse réseau `10.33.64.0/20`, avec donc un total de 4096 adresses IP uniques. Nous avons identifié environ 600 appareils connectés à ce réseau, vous pouvez aller consulter la liste des addresses ip et des adresses mac correspondants dans ce ![fichier](files/Live_Devices_Main_Network.txt)
 
-Cependant, il est important de noter qu'il y avait également un deuxième réseau en place, spécialement destiné aux télévisions et à quelques autres appareils. Pour identifier ce réseau, nous avons observer les adresses IP qui s'affichaient sur chaque télévision lorsque nous les allumions. Le réseau secondaire a donc pour adresse réseau le `10.33.80.0/20`. Vous pouvez consulter la liste des appareils connectés à ce réseau dans ce ![fichier](files/Live_Devices_Secondary_Network.txt)
+Cependant, il est important de noter qu'il y avait également un deuxième réseau en place, spécialement destiné aux télévisions et à quelques autres appareils. Pour identifier ce réseau, nous avons observer les adresses IP qui s'affichaient sur chaque télévision lorsque nous les allumions. Le réseau secondaire a donc pour adresse réseau le `10.33.81.128/25`. Vous pouvez consulter la liste des appareils connectés à ce réseau dans ce ![fichier](files/Live_Devices_Secondary_Network.txt)
 
 ### Réseau Bluetooth
 
