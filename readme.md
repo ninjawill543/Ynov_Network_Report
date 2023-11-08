@@ -10,12 +10,9 @@
     - [Équipements réseau](#équipements-réseau)
         - [Télévisions](#télévisions)
         - [Bornes Wifi](#bornes-wifi)
-- [III - Sécurité du réseau](#iii---sécurité-du-réseau)
-    - [Mesures de sécurité actuelles](#mesures-de-sécurité-actuelles)
-    - [Vulnérabilités et menaces potentielles](#vulnérabilités-et-menaces-potentielles)
-        - [MITM potentiel via les télévisions](#mitm-potentiel-via-les-télévisions)
-        - [Exploitation WPA2 Enterprise](#exploitation-wpa2-enterprise)
-    - [Recommandations à mettre en place](#recommandations-à-mettre-en-place)
+- [III - Vulnérabilités et menaces potentielles](#iii---vulnérabilités-et-menaces-potentielles)
+    - [MITM potentiel via les télévisions](#mitm-potentiel-via-les-télévisions)
+    - [Exploitation WPA2 Enterprise](#exploitation-wpa2-enterprise)
 - [IV - Conclusion](#iv---conclusion)
 
 # I - Introduction
@@ -42,7 +39,7 @@ Se projet est un exercice visant à explorer et à analyser le réseau Ynov en r
 
 L'infrastructure du réseau Ynov est conçue pour prendre en charge un nombre significatif d'appareils connectés. Le réseau principal a pour addresse réseau `10.33.64.0/20`, avec donc un total de 4096 adresses IP uniques. Nous avons identifié environ 600 appareils connectés à ce réseau, vous pouvez aller consulter la liste des addresses ip et des adresses mac correspondants dans ce ![fichier](files/Live_Devices_Main_Network.txt)
 
-Cependant, il est important de noter qu'il y avait également un deuxième réseau en place, spécialement destiné aux télévisions et à quelques autres appareils. Pour identifier ce réseau, nous avons observer les adresses IP qui s'affichaient sur chaque télévision lorsque nous les allumions. Le réseau secondaire a donc pour adresse réseau le `10.33.81.128/25`. Vous pouvez consulter la liste des appareils connectés à ce réseau dans ce ![fichier](files/Live_Devices_Secondary_Network.txt)
+Cependant, il est important de noter qu'il y avait également un deuxième réseau en place, spécialement destiné aux télévisions et à quelques autres appareils. Pour identifier ce réseau, nous avons observer les adresses IP qui s'affichaient sur chaque télévision lorsque nous les allumions. Le réseau secondaire a donc pour adresse réseau le `10.33.81.128/25`.Vous pouvez consulter nos recherches [ici](#télévisions)
 
 ### Réseau Bluetooth
 
@@ -293,7 +290,7 @@ Le port 8000 est aussi ouvert et consultable via un navigateur web `10.33.81.194
 
 Nous avons ensuite scanné le réseaux secondaire afin de trouver les adresses ip de chaque télévision actuellement allumée. 
 ```bash
-$ sudo nmap 10.33.80.0/20 -p1443 --open
+$ sudo nmap -n 10.33.81.128/25 -p1443 --open
 ```
 Nous avons choisi de filtrer toutes les appareils afin de voir que ceux avec le port 1443 d'ouvert, c'est à dire le port utilisé sur chaque télévision afin qu'un utilisateur puisse se connecter. Vous pouvez consulter la liste des adresses ip des télés ![ici](files/Live_TVs_Secondary_Network.txt)
 
