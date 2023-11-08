@@ -336,6 +336,8 @@ Vous pouvez retrouver [ici](#-exploitation-wpa2-enterprise) notre guide sur comm
 
 ## MITM potentiel via les télévisions
 
+![](images/man.jpg)
+
 La connection au port 8000 se fait en http : autrement les échanges ne sont pas chiffrés. Ce qui est donc vulnérable à une attaque Man In The Middle, dans laquelle une personne malveillante pourrait faire télécharger un fichier compromis au lieu de l'application EShare mobile.
 
 ## Exploitation WPA2 Enterprise
@@ -368,3 +370,5 @@ Nous avons obtenus :
 Les informations recueillis nous ont aussi permis de détecter des potentielles vulnérabilités :
 - téléchargement de fichier en http sur les télévisions
 - wifi publique vulnérable à de la désauthentification
+
+![](images/gracias.gif)
