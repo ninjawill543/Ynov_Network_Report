@@ -181,14 +181,19 @@ On obtient [tous ces fichiers](files/Vendors/).
 #### Interprétation des données
 
 Nous avons un total de 565 appareils parmis lesquels se trouvent 17 catégories.
+Parmis ces appareils, certains appartiennent à Ynov, d'autres aux étudiants ou particuliers présent dans le bâtiments.
+
+### [Salto systems](files/Vendors/SALTO_SYSTEMS_S.L.txt)
+
+95 serrures electroniques Salto.
+
+### [Aruba Hewlett Packard](files/Vendors/Aruba_a_Hewlett_Packard_Enterprise_Company.txt)
+
+30 routeurs wifi d'après nos résultats trouvés [ici](#bornes-wifi).
 
 ### [Apple](files/Vendors/Apple_Inc.txt)
 
 1 MacBook Pro et 1 MacBook Air avec les noms de familles des propriétaires dans le nom de l'appareil.
-
-### [Aruba Hewlett Packard](files/Vendors/Aruba_a_Hewlett_Packard_Enterprise_Company.txt)
-
-30 appareils qui semblent être des routeurs wifi d'après cette page : https://www.arubanetworks.com/resources/case-studies/hewlett-packard-enterprise/
 
 ### [AzureWave Technology](files/Vendors/AzureWave_Technology_Inc.txt)
 
@@ -245,15 +250,11 @@ Device 45:E7:65:3B:F2:1F JBL LIVE300TWS-LE # écouteurs JBL
 
 ### [Polar Electro](files/Vendors/Polar_Electro_Oy.txt)
 
-1 équipement d'entraînement sportif.
+1 montre connecté.
 
 ### [Realme](files/Vendors/Realme_Chongqing_Mobile_Telecommunications_Corp.Ltd.txt)
 
 1 smartphone Realme.
-
-### [Salto systems](files/Vendors/SALTO_SYSTEMS_S.L.txt)
-
-95 serrures electroniques Salto.
 
 ### [Samsung](files/Vendors/Samsung_Electronics_Co.Ltd.txt)
 
@@ -262,7 +263,6 @@ Device 45:E7:65:3B:F2:1F JBL LIVE300TWS-LE # écouteurs JBL
 ### [Sony](files/Vendors/Sony_Home_EntertainmentSound_Products_Inc.txt)
 
 2 casques Sony.
-
 
 ## Équipements réseau
 
@@ -287,9 +287,9 @@ PORT     STATE SERVICE
 8600/tcp open  asterix
 ```
 
-En allant regarder cette adresse ip `10.33.81.194:1443` via un navigateur web, on tombe sur le site `eshare.app`, qui est en fait hebergé en local sur la télévision, en https. Ce site nous permet normalement de partager notre ecran sur la télé, mais malheuresement, le site hebergé nous renvoie tout simplement un message d'erreur `Receiver is offline, please try again`, à chaque fois qu'on essaie de se connecter.
+En allant regarder cette adresse ip `10.33.81.194:1443` via un navigateur web, on tombe sur le site `eshare.app`, qui est en fait hebergé en local sur la télévision, en https. Ce site nous permet normalement de partager notre écran sur la télé, mais malheureusement, le site hebergé nous renvoie tout simplement un message d'erreur `Receiver is offline, please try again`, à chaque fois qu'on essaie de se connecter.
 
-Le port 8000 est aussi ouvert et consultable via un navigateur web `10.33.81.194:8000`, cette fois par contre étant en http. Ce site nous permet d'installer le client mobile de Eshare, afin de pouvoir partager notre écran. Vous pouvez lire une explication de la vulnerabilité que ce site contient [ici](#mitm-potentiel-via-les-télévisions)
+Le port 8000 est aussi ouvert et consultable via un navigateur web `10.33.81.194:8000`, cette fois par contre étant en http. Ce site nous permet d'installer le client mobile de Eshare, afin de pouvoir partager notre écran. Vous trouverez une explication de la vulnerabilité [ici](#mitm-potentiel-via-les-télévisions).
 
 Nous avons ensuite scanné le réseaux secondaire afin de trouver les adresses ip de chaque télévision actuellement allumée. 
 ```bash
@@ -307,7 +307,7 @@ $ sudo airmon-ng start wlp0s20f3
 $ sudo airodump-ng wlp0s20f3mon
 ```
 
-En regardant les logs créé par l'outil aircrack-ng, nous nous apercevons que le réseau ynov utilisait par les étudiants, c'est-à-dire `WIFI@YNOV` était bien en WPA2 Enterprise, et donc qu'on devait utiliser un autre méthode si l'on voulait retrouver les identifiants des étudiants.
+En regardant les logs créé par l'outil aircrack-ng, nous nous apercevons que le réseau ynov utilisé par les étudiants, c'est-à-dire `WIFI@YNOV` était bien en WPA2 Enterprise, et donc qu'il faudrait utiliser une autre méthode si l'on voulait retrouver les identifiants des étudiants.
 
 Lorsque nous voyons `PSK` à coté du nom du réseau, cela veut dire `Pre Shared Key`, ou tout simplement que les utilisateurs ont un seul mot de passe qui leur permettent tous de se connecter. Lorsque nous voyons un réseau WPA2 PSK, nous pouvions lancer notre sniffer afin de capturer le handshake, et donc essayer ensuite de retrouver le mot de passe via un outil par exemple Hashcat. 
 
@@ -331,6 +331,8 @@ E8:10:98:99:2C:40, 260, WPA2, CCMP, MGT, WiFi@YNOV
 E8:10:98:99:2C:41, 260, WPA3 WPA2, CCMP, SAE PSK, VDI@YNOV
 ```
 
+Ces adresses MAC nous informent que les routeurs viennent du fabriquant Aruba Network. Nous pouvons en déduire que [ces appareils](#aruba-hewlett-packard) trouvés lors du scan bluetooth correspondent bien aux routeurs wifi d'Ynov.
+
 Vous pouvez retrouver [ici](#-exploitation-wpa2-enterprise) notre guide sur comment exploiter la WPA2 Enterprise
 
 # III - Sécurité du réseau
@@ -343,11 +345,11 @@ Vous pouvez retrouver [ici](#-exploitation-wpa2-enterprise) notre guide sur comm
 
 ### Exploitation WPA2 Enterprise
 
-Pour rappel, nous n'avons pas utilisé cette attaque, nous voulions simplement vous expliquer comment elle fonctionne
+Pour rappel, nous n'avons pas utilisé cette attaque, nous voulions simplement vous expliquer comment elle fonctionne.
 
 Pour commencer, on va vous rappeler comment la WPA2 Enterprise fonctionne:
 
-La WPA2 Enterprise utilise le protocole EAP  pour l'authentification des utilisateurs, généralement en conjonction avec un serveur RADIUS . Ce protocole permet d'établir des clés de chiffrement uniques pour chaque utilisateur, renforçant ainsi la sécurité en utilisant des méthodes d'authentification plus robustes que les simples mots de passe partagés. 
+La WPA2 Enterprise utilise le protocole EAP  pour l'authentification des utilisateurs, généralement en conjonction avec un serveur RADIUS. Ce protocole permet d'établir des clés de chiffrement uniques pour chaque utilisateur, renforçant ainsi la sécurité en utilisant des méthodes d'authentification plus robustes que les simples mots de passe partagés. 
 
 L'attaque consiste à spoofer le réseau cible et à fournir un signal plus fort au client qu'un point d'accès légitime, afin d'effectuer une attaque de Man-In-The-Middle entre les clients et le réseau.
 
